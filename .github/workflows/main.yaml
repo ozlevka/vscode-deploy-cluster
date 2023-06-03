@@ -33,8 +33,11 @@ jobs:
 
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v4
       with:
-        registry: ghcr.io
-        repository: ${{ github.repository }}
-        tags: latest ${{ steps.get_version.outputs.version }}
+        context: .
+        push: true
+        tags: ${{ github.repository }}:latest
+        # registry: ghcr.io
+        # repository: ${{ github.repository }}
+        # tags: latest ${{ steps.get_version.outputs.version }}
