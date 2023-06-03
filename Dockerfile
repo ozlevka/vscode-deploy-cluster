@@ -13,11 +13,11 @@ ARG USER_GID=$USER_UID
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary tools
-RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certificates \
+RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certificates apt-utils \
     && curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
     && install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ \
     && ARCHITECTURE=$(dpkg --print-architecture) \
-    && curl -L https://update.code.visualstudio.com/1.78.0/linux-deb-${ARCHITECTURE}/stable -o code_${ARCHITECTURE}.deb \
+    && curl -L https://update.code.visualstudio.com/1.78.0/linux-deb-$(if [ "${ARCHITECTURE}" = "arm64" ]; then echo "arm64"; elif [ "${ARCHITECTURE}" = "amd64" ]; then echo "x64"; fi)/stable -o code_${ARCHITECTURE}.deb \
     && dpkg -i code_${ARCHITECTURE}.deb || true \
     && apt-get install -fy \
     # Install kubectl
