@@ -13,7 +13,7 @@ ARG USER_GID=$USER_UID
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary tools
-RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certificates apt-utils \
+RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certificates apt-utils vim git fish \
     && curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
     && install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ \
     && ARCHITECTURE=$(dpkg --print-architecture) \
@@ -28,6 +28,8 @@ RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certi
     && curl -L -o /tmp/helm.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-${ARCHITECTURE}.tar.gz \
     && cd /tmp && tar xzf helm.tar.gz \
     && mv linux-${ARCHITECTURE}/helm /usr/local/bin/helm && chmod +x /usr/local/bin/helm \
+    # Install Extensions
+    && code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
