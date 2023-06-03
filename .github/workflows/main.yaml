@@ -1,6 +1,7 @@
 name: Main action Build image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
