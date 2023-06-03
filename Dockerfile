@@ -28,8 +28,6 @@ RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certi
     && curl -L -o /tmp/helm.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-${ARCHITECTURE}.tar.gz \
     && cd /tmp && tar xzf helm.tar.gz \
     && mv linux-${ARCHITECTURE}/helm /usr/local/bin/helm && chmod +x /usr/local/bin/helm \
-    # Install Extensions
-    && code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
@@ -40,3 +38,6 @@ RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certi
 
 USER vscode
 WORKDIR /home/vscode
+
+# Install extensions
+RUN code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
