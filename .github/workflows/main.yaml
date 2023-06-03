@@ -40,7 +40,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ github.repository }}:latest
+        tags: ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}:${{ steps.get_version.outputs.version }}
         # registry: ghcr.io
         # repository: ${{ github.repository }}
         # tags: latest ${{ steps.get_version.outputs.version }}
