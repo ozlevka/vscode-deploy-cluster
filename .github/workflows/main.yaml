@@ -21,7 +21,6 @@ jobs:
       uses: ozlevka-work/docker-build-gh-repo-push@develop
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: vscode-cli-ubuntu # Provide Docker image name
         image-tag: ${{ steps.get_version.outputs.version }} # Provide Docker image tag
     
     # - name: Login to GitHub Container Registry
