@@ -28,7 +28,7 @@ spec:
     serviceAccountName: vscode
     containers:
     - name: vscode-ubuntu
-      image: ghcr.io/ozlevka/vscode-deploy-cluster:latest
+      image: ghcr.io/ozlevka/vscode-deploy-cluster:2023060315-89d9af4
       command: 
       - /bin/bash
       - -c
