@@ -13,7 +13,7 @@ ARG USER_GID=$USER_UID
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary tools
-RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certificates apt-utils vim git fish \
+RUN apt-get update && apt-get install -y curl apt-transport-https gnupg ca-certificates apt-utils vim git fish tmux \
     && curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
     && install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ \
     && ARCHITECTURE=$(dpkg --print-architecture) \
